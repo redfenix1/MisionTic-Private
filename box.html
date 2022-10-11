@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box | Reto 2</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script type="text/javascript" src="js/box.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+            <h1>Palcos</h1>
+            <a class="btn btn-secondary" href="index.html" role="button">Regresar</a>
+        </div>
+        <div>
+            <div class="mb-3">
+                <label for="idBox" class="form-label">ID</label>
+                <input type="number" class="form-control" id="idBox">
+            </div>
+            <div class="mb-3">
+                <label for="locationBox" class="form-label">Ubicación</label>
+                <input type="text" class="form-control" id="locationBox">
+            </div>
+            <div class="mb-3">
+                <label for="capacityBox" class="form-label">Capacidad</label>
+                <input type="number" class="form-control" id="capacityBox">
+            </div>
+            <div class="mb-3">
+                <label for="category_idBox" class="form-label">Categoría</label>
+                <input type="number" class="form-control" id="category_idBox">
+            </div>
+            <div class="mb-3">
+                <label for="nameBox" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="nameBox">
+            </div>
+
+            <button class="btn btn-success" onclick="saveBox()">Guardar Palco</button>
+            <button class="btn btn-warning" onclick="updateBox()">Actualizar Palco</button>
+            <button class="btn btn-primary float-end" onclick="readBoxs()">Mostrar Palcos</button>
+        </div>
+
+        <hr class="border border-primary border-1 opacity-75">
+
+        <div id="listBoxs">
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,48 @@
+-- CREAR TABLA (CLIENTE)
+CREATE TABLE ADMIN.CLIENT (
+	ID NUMBER,
+    NAME VARCHAR2(4000),
+    EMAIL VARCHAR2(20),
+	AGE NUMBER,
+    CONSTRAINT CLIENT_ID_pk PRIMARY KEY(ID)
+);
+
+
+-- MANEJADOR GET
+SELECT * FROM CLIENT ORDER BY ID;
+
+
+-- MANEJADOR POST
+BEGIN
+    INSERT INTO CLIENT (ID, NAME, EMAIL, AGE)
+    VALUES (:id, :name, :email, :age);
+    :status_code := 201;
+END;
+
+
+-- MANEJADOR PUT
+BEGIN
+    UPDATE CLIENT
+    SET 
+        NAME = :name,
+        EMAIL = :email,
+        AGE = :age
+    WHERE
+        ID = :id;
+    :status_code := 201;
+END;
+
+
+-- MANEJADOR DELETE
+BEGIN
+    DELETE FROM CLIENT WHERE ID = :id;
+    :status_code := 204;
+END;
+
+
+-- MANEJADOR GET :id
+SELECT * FROM CLIENT WHERE ID = :id;
+
+
+-- VACIAR TABLA
+TRUNCATE TABLE CLIENT;
