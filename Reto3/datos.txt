@@ -1,0 +1,18 @@
+*****************************
+ORACLE SERVER
+IP: 132.226.167.157
+user: opc
+pass for ssh: password
+
+
+*****************************
+UBUNTU SERVER
+IP: 144.22.220.148
+user: ubuntu
+pass for ssh: password
+
+
+*****************************
+MYSQL SERVER (DB)
+user: admin
+Pass: Password123*

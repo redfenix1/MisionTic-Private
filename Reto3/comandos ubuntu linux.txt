@@ -1,0 +1,88 @@
+sudo apt update
+sudo apt upgrade
+sudo apt install git
+sudo apt install openjdk-11-jdk
+java -version
+javac -version
+
+
+#Maven 3.6.3
+wget https://archive.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz -P /tmp
+sudo tar xf /tmp/apache-maven-*.tar.gz -C /opt
+sudo ln -s /opt/apache-maven-3.6.3 /opt/maven
+sudo nano /etc/profile.d/maven.sh
+
+sudo ln -s /usr/lib/jvm/java-11-openjdk-amd64 /usr/lib/jvm/default-java
+
+#Pegar:
+export JAVA_HOME=/usr/lib/jvm/default-java
+export M2_HOME=/opt/maven
+export MAVEN_HOME=/opt/maven
+export PATH=${M2_HOME}/bin:${PATH}
+
+
+sudo chmod +x /etc/profile.d/maven.sh
+source /etc/profile.d/maven.sh
+mvn -version
+
+Fuente: https://noviello.it/es/como-instalar-apache-maven-en-ubuntu-20-04-lts/
+
+
+#Apache
+
+#apache
+sudo apt install apache2
+sudo systemctl start apache2
+sudo systemctl enable apache2
+sudo apachectl configtest
+
+
+#Si sale error en el último comando
+sudo nano /etc/apache2/apache2.conf
+#Pegar al final de la línea
+ServerName 127.0.0.1
+
+sudo apachectl configtest
+
+#Firewall
+
+sudo nano /var/www/html/index.html
+#Pegar:
+<html>
+<body>
+<h1>HOLA MUNDO</h1>
+<h2>UBUNTU LINUX</h2>
+</body>
+</html>
+
+#Para habilitar el firewall
+Fuente: https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-ubuntu-22-04
+
+
+
+#Firewall Sin Probar
+#Iniciar como ROOT 
+sudo iptables -I INPUT -p tcp -m tcp --dport 80 -j ACCEPT
+sudo iptables -I INPUT -p tcp -m tcp --dport 443 -j ACCEPT
+#Es posible que toque detener los servicios netfilter e iptables
+sudo /sbin/iptables-save > /etc/iptables/rules.v4
+sudo /sbin/ip6tables-save > /etc/iptables/rules.v6
+
+cat /etc/iptables/rules.v4
+
+sudo /sbin/iptables-restore < /etc/iptables/rules.v4
+sudo /sbin/ip6tables-restore < /etc/iptables/rules.v6
+
+sudo apt install iptables-persistent
+
+#Verificar si el servicio está habilitado
+sudo systemctl is-enabled netfilter-persistent.service
+
+#Si el servicio no está habilitado
+sudo systemctl enable netfilter-persistent.service
+
+#Iniciar si no está habilitado
+sudo systemctl status netfilter-persistent.service
+sudo systemctl start netfilter-persistent.service
+
+Fuente: https://www.cyberciti.biz/faq/how-to-save-iptables-firewall-rules-permanently-on-linux/

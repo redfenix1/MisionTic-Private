@@ -1,0 +1,58 @@
+sudo yum update
+sudo yum install git
+git --version
+sudo yum install java-11-openjdk-devel
+java -version
+javac -version
+
+#Opcionales
+sudo dnf install wget
+sudo dnf install tar
+sudo dnf install nano
+
+#Maven 3.6.3
+wget https://archive.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz -P /tmp
+sudo tar xf /tmp/apache-maven-3.6.3-bin.tar.gz -C /opt
+sudo ln -s /opt/apache-maven-3.6.3 /opt/maven
+sudo nano /etc/profile.d/maven.sh
+#Pegar:
+export JAVA_HOME=/usr/lib/jvm/jre-openjdk
+export M2_HOME=/opt/maven
+export MAVEN_HOME=/opt/maven
+export PATH=${M2_HOME}/bin:${PATH}
+
+
+sudo chmod +x /etc/profile.d/maven.sh
+source /etc/profile.d/maven.sh
+
+mvn -version
+
+sudo yum install -y apache-maven
+sudo alternatives --config java
+sudo alternatives --config javac
+
+
+Fuente: https://noviello.it/es/como-instalar-apache-maven-en-centos-8/
+
+
+#apache
+sudo dnf install httpd
+sudo apachectl start
+sudo systemctl enable httpd
+sudo apachectl configtest
+
+
+#Firewall
+sudo firewall-cmd --permanent --zone=public --add-service=http
+sudo firewall-cmd --reload
+
+
+sudo nano /var/www/html/index.html
+#Pegar:
+<html>
+<body>
+<h1>HOLA MUNDO</h1>
+<h2>ORACLE LINUX</h2>
+</body>
+</html>
+
