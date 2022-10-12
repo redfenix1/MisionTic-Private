@@ -56,3 +56,7 @@ sudo nano /var/www/html/index.html
 </body>
 </html>
 
+
+#Establecer zona horaria
+sudo timedatectl set-timezone "America/Bogota"
+sudo tzselect
