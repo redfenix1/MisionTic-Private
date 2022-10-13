@@ -13,6 +13,10 @@ pass for ssh: password
 
 
 *****************************
-MYSQL SERVER (DB)
+MYSQL SERVER (DB) (LOCALHOST y REMOTO)
 user: admin
 Pass: Password123*
+
+
+
+
