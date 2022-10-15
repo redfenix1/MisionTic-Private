@@ -21,8 +21,8 @@ public class BoxController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Box> getBox(@PathVariable("id") int boxId){
-        return boxService.getBox(boxId);
+    public Optional<Box> getBox(@PathVariable("id") int idBox){
+        return boxService.getBox(idBox);
     }
 
     @PostMapping("/save")
@@ -36,8 +36,8 @@ public class BoxController {
     }
 
     @DeleteMapping("/delete")
-    public boolean delete(@PathVariable("id") int boxId){
-        return boxService.delete(boxId);
+    public boolean delete(@PathVariable("id") int idBox){
+        return boxService.delete(idBox);
     }
 
 }

@@ -1,0 +1,11 @@
+//category
+[
+	{
+		"id":1,
+		"name":"cat1",
+		"description":"test category",
+		"boxes":[]
+	}
+]
+
+//
