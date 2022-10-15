@@ -59,11 +59,17 @@ sudo nano /var/www/html/index.html
 Fuente: https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-ubuntu-22-04
 
 
+#Instalar iptables persist
+sudo apt install iptables-persistent
+
 
 #Firewall Sin Probar
 #Iniciar como ROOT 
 sudo iptables -I INPUT -p tcp -m tcp --dport 80 -j ACCEPT
 sudo iptables -I INPUT -p tcp -m tcp --dport 443 -j ACCEPT
+sudo iptables -I INPUT -p tcp -m tcp --dport 8080 -j ACCEPT
+sudo iptables -I INPUT -p tcp -m tcp --dport 3306 -j ACCEPT
+
 #Es posible que toque detener los servicios netfilter e iptables
 sudo /sbin/iptables-save > /etc/iptables/rules.v4
 sudo /sbin/ip6tables-save > /etc/iptables/rules.v6
@@ -90,6 +96,19 @@ Fuente: https://www.cyberciti.biz/faq/how-to-save-iptables-firewall-rules-perman
 
 #instalar mysql8.0
 sudo apt install mysql-server
+
+#Alternativca para instalar mysql
+sudo apt install gnupg wget
+#>Ir a la página y copiar el enlace de descarga: https://dev.mysql.com/downloads/repo/apt/
+wget https://repo.mysql.com//mysql-apt-config_0.8.23-1_all.deb
+sudo dpkg -i mysql-apt-config_0.8.23-1_all.deb
+#Seleccionar la version de java, dar OK, y actualizar repos
+sudo apt update
+sudo apt install mysql-server
+sudo systemctl status mysql
+
+Fuente: https://chachocool.com/como-instalar-mysql-server-en-debian-11-bullseye/
+
 
 #Inicialmente no tiene passsword
 sudo mysql -u root -p

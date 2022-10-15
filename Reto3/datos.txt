@@ -13,6 +13,14 @@ pass for ssh: password
 
 
 *****************************
+DEBIAN SERVER
+IP: 34.69.219.242
+user: michaellondonomt
+pass for ssh: password
+
+
+
+*****************************
 MYSQL SERVER (DB) (LOCALHOST y REMOTO)
 user: admin
 Pass: Password123*
