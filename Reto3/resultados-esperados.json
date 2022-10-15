@@ -8,4 +8,101 @@
 	}
 ]
 
-//
+//box
+[
+	{
+		"id":1,
+		"name":"Palco vip para 15 personas",
+		"location":"VIP",
+		"capacity":15,
+		"description":"Palco vip para 15 personas",
+		"category":{
+			"id":1,
+			"name":"cat1",
+			"description":"test category"
+		},
+		"messages":[],
+		"reservations":[]
+	}
+]
+
+//client
+[
+	{
+		"idClient":1,
+		"email":"agustin@gmail.com",
+		"password":"agustin123",
+		"name":"Agustin Parra",
+		"age":18,
+		"messages":[],
+		"reservations":[]
+	}
+]
+
+
+//message
+[
+	{
+		"idMessage":1,
+		"messageText":"Me gusta.",
+		"box":{
+			"id":1,
+			"name":"Palco vip para 15 personas",
+			"location":"VIP",
+			"capacity":15,
+			"description":"Palco vip para 15 personas",
+			"category":{
+				"id":1,
+				"name":"cat1",
+				"description":"test category"
+			}
+		},
+		"client":{
+			"idClient":1,
+			"email":"agustin@gmail.com",
+			"password":"agustin123",
+			"name":"Agustin Parra",
+			"age":18
+		}
+	}
+]
+
+
+//reservation
+[
+	{
+		"idReservation":1,
+		"startDate":"2020-12-20T00:00:00.000+00:00",
+		"devolutionDate":"2020-12-20T00:00:00.000+00:00",
+		"status":"created",
+		"box":{
+			"id":1,
+			"name":"Palco vip para 15 personas",
+			"location":"VIP",
+			"capacity":15,
+			"description":"Palco vip para 15 personas",
+			"category":{
+				"id":1,
+				"name":"cat1",
+				"description":"test category"
+			},
+			"messages":[
+				{
+					"idMessage":1,
+					"messageText":"Me gusta."
+				}
+			]
+		},
+		"client":{
+			"idClient":1,
+			"email":"agustin@gmail.com",
+			"password":"agustin123",
+			"name":"Agustin Parra",
+			"age":18
+		},
+		"score":null
+	}
+]
+
+
+
