@@ -3,13 +3,14 @@ package com.usa.misiontic.reto3.controller;
 import com.usa.misiontic.reto3.entities.Box;
 import com.usa.misiontic.reto3.service.BoxService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/box")
+@RequestMapping("/api/Box")
 public class BoxController {
 
     @Autowired
@@ -26,16 +27,19 @@ public class BoxController {
     }
 
     @PostMapping("/save")
+    @ResponseStatus(HttpStatus.CREATED)
     public Box save(@RequestBody Box b){
         return boxService.save(b);
     }
 
     @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
     public Box update(@RequestBody Box b){
         return boxService.update(b);
     }
 
     @DeleteMapping("/delete")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public boolean delete(@PathVariable("id") int idBox){
         return boxService.delete(idBox);
     }

@@ -1,35 +1,38 @@
-package com.usa.misiontic.reto3.entities;
+package entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonIgnoreType;
+
 
 import javax.persistence.*;
+
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
-@Table(name = "reservation")
+@Table( name = "reservation")
 public class Reservation implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idReservation;
     private Date startDate;
     private Date devolutionDate;
-    private String status;
+    private String status="created";
+
 
     @ManyToOne
-    //@JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
-    @JoinColumn(name = "idBox")
+    @JoinColumn(name = "boxId")
     @JsonIgnoreProperties("reservations")
     private Box box;
-
     @ManyToOne
-    @JoinColumn(name = "idClient")
-    @JsonIgnoreProperties({"messages","reservations"})
+    @JoinColumn(name = "clientId")
+    @JsonIgnoreProperties({"reservations", "messages"})
     private Client client;
 
-    private String score;
+    @OneToOne(cascade = {CascadeType.REMOVE},mappedBy="reservation")
+    @JsonIgnoreProperties("reservation")
+    private Score score;
 
     public Integer getIdReservation() {
         return idReservation;
@@ -79,11 +82,13 @@ public class Reservation implements Serializable {
         this.client = client;
     }
 
-    public String getScore() {
+    public Score getScore() {
         return score;
     }
 
-    public void setScore(String score) {
+    public void setScore(Score score) {
         this.score = score;
     }
 }
+
+

@@ -86,3 +86,24 @@ sudo systemctl status netfilter-persistent.service
 sudo systemctl start netfilter-persistent.service
 
 Fuente: https://www.cyberciti.biz/faq/how-to-save-iptables-firewall-rules-permanently-on-linux/
+
+
+#instalar mysql8.0
+sudo apt install mysql-server
+
+#Inicialmente no tiene passsword
+sudo mysql -u root -p
+use mysql;
+alter user 'root'@'localhost' identified by '2006Cemid';
+flush privileges;
+
+
+
+//Cambiar el bind-address=0.0.0.0
+sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
+sudo systemctl restart mysql.service
+
+
+//probar tcping
+sudo nc -vz 10.0.0.227 80
+

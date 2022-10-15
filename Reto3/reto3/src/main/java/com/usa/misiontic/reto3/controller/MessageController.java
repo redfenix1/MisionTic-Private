@@ -3,13 +3,14 @@ package com.usa.misiontic.reto3.controller;
 import com.usa.misiontic.reto3.entities.Message;
 import com.usa.misiontic.reto3.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/message")
+@RequestMapping("/api/Message")
 public class MessageController {
 
     @Autowired
@@ -26,16 +27,19 @@ public class MessageController {
     }
 
     @PostMapping("/save")
+    @ResponseStatus(HttpStatus.CREATED)
     public Message save(@RequestBody Message b){
         return messageService.save(b);
     }
 
     @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
     public Message update(@RequestBody Message b){
         return messageService.update(b);
     }
 
     @DeleteMapping("/delete")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public boolean delete(@PathVariable("id") int idMessage){
         return messageService.delete(idMessage);
     }

@@ -1,36 +1,32 @@
-package com.usa.misiontic.reto3.entities;
-
+package entities;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 import javax.persistence.*;
+
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "box")
-public class Box implements Serializable {
+@Table(name ="box")
+public class Box implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idBox")
     private Integer id;
     private String name;
     private String location;
     private Integer capacity;
+
     private String description;
 
     @ManyToOne
-    //@JoinColumn(name = "id")
-    //@JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
-    @JoinColumn(name = "idCategory")
+    @JoinColumn(name ="categoryId")
     @JsonIgnoreProperties("boxes")
     private Category category;
-
-    @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "box")
+    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "box")
     @JsonIgnoreProperties({"box", "client"})
     private List<Message> messages;
-
-    @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "box")
+    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "box")
     @JsonIgnoreProperties({"box", "messages"})
     private List<Reservation> reservations;
 
@@ -40,6 +36,14 @@ public class Box implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getLocation() {
@@ -56,14 +60,6 @@ public class Box implements Serializable {
 
     public void setCapacity(Integer capacity) {
         this.capacity = capacity;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getDescription() {
