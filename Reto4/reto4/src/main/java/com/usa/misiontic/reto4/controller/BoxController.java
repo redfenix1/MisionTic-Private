@@ -38,7 +38,7 @@ public class BoxController {
         return boxService.update(b);
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public boolean delete(@PathVariable("id") int idBox){
         return boxService.delete(idBox);

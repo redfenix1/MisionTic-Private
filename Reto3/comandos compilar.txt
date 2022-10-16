@@ -15,6 +15,7 @@ java -jar target/ejecutable.jar
 
 mvn clean package -P prod -DskipTests
 
-ps aux | grep sevenet
-# kill -9 2435
+#Detener
+ps aux | grep java
+kill -9 2435
 
