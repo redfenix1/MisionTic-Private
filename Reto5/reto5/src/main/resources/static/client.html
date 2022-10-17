@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <!-- custom scripts -->
+    <script type="text/javascript" src="js/functions.js"></script>
+    <script type="text/javascript" src="js/client.js"></script>
+</head>
+
+<body>
+    <header id="mainMenu"></header>
+    <main class="container">
+        <div class="d-flex justify-content-between align-items-center">
+            <h1>Clientes</h1>
+            <!-- <a class="btn btn-secondary" href="index.html" role="button">Regresar</a> -->
+        </div>
+        <div class="row row-cols-1 row-cols-md-2 g-2 p-4 bg-light rounded-3">
+            <div class="col-md-2 form-floating mb-3">
+                <input type="number" class="form-control" id="idClient" placeholder="ID del cliente" disabled>
+                <label for="idClient">ID</label>
+            </div>
+            <div class="col-md-10 form-floating mb-3">
+                <input type="text" class="form-control" id="nameClient" placeholder="Nombre del cliente">
+                <label for="nameClient">Nombre</label>
+            </div>
+            <div class="col-md-12 form-floating mb-3">
+                <input type="email" class="form-control" id="emailClient" placeholder="Correo del cliente">
+                <label for="emailClient">Correo</label>
+            </div>
+            <div class="col-md-10 form-floating mb-3">
+                <input type="password" class="form-control" id="passwordClient" placeholder="Contraseña del cliente">
+                <label for="passwordClient">Contraseña</label>
+            </div>
+            <div class="col-md-2 form-floating mb-3">
+                <input type="number" class="form-control" id="ageClient" placeholder="Edad del cliente">
+                <label for="ageClient">Edad</label>
+            </div>
+
+            <div class="col-12 col-md-12">
+                <div class="row gap-3">
+                    <button class="col-md btn btn-success" id="saveClient" onclick="saveClient()">Guardar</button>
+                    <button class="col-md btn btn-warning" id="updateClient" onclick="updateClient()">Actualizar</button>
+                    <button class="col-md btn btn-primary float-end" id="readClients" onclick="readClients(); buttonsDisplay(true,false,true);">Listar</button>
+                </div>
+            </div>
+        </div>
+
+        <hr class="border border-primary border-1 opacity-75">
+
+        <div id="listClients">
+
+        </div>
+    </main>
+    <footer></footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+</body>
+</html>
+
+
+

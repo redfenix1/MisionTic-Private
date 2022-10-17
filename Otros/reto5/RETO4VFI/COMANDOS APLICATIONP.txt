@@ -1,0 +1,37 @@
+https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fl%2Fmeetup-join%2F19%3Ameeting_ZWFkNDQyYjctN2YwMC00OGMzLTg1OWYtYTFiOTIzMWFkM2Y3%40thread.v2%2F0%3Fcontext%3D%257b%2522Tid%2522%253a%252203e1b226-5789-4a97-90f6-44a44241ba6d%2522%252c%2522Oid%2522%253a%252261a9551f-936f-401a-a01f-9711fef09631%2522%257d%26anon%3Dtrue&type=meetup-join&deeplinkId=3358de7b-7b0f-4e30-b8dd-a20818c5d040&directDl=true&msLaunch=true&enableMobilePage=true&suppressPrompt=true
+
+
+
+
+
+
+APLICATION-DEV
+spring.datasource.url=jdbc:h2:mem:testdb1
+spring.datasource.driverClassName = org.h2.Driver
+spring.datasource.usermame=sa
+spring.datasource.password=123456
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+server.port=89
+
+
+APLICATION-PROD
+
+spring.datasource.url=jdbc:mysql://127.0.0.1/s12
+spring.datasource.name=mysql
+spring.datasource.username=root
+spring.datasource.password=12345
+spring.datasource.class=com.mysql.jdbc.Driver
+spring.jpa.hibernate.ddl-auto = create
+spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL55Dialect
+server.port=8090
+
+
+
+APLICATION PROPERTIES
+
+spring.profiles.active=prod
+spring.h2.console.enabled = false
+
+
+
+
