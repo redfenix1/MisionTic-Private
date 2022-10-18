@@ -9,8 +9,8 @@ function headerMenu(){
     let jsCategories ="category.html";
     let jsBoxes ="box.html";
     let jsClients ="client.html";
-    let jsReservations ="#";
-    let jsMessages ="#";
+    let jsReservations ="reservation.html";
+    let jsMessages ="message.html";
     let jsReport1 = "report1.html";
     let jsReport2 = "report2.html";
     let jsReport3 = "report3.html";
@@ -32,16 +32,19 @@ function headerMenu(){
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="${jsHome}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Acciones
+                                Parametrizar
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="${jsCategories}">Categorías</a></li>
                                 <li><a class="dropdown-item" href="${jsBoxes}">Palcos</a></li>
                                 <li><a class="dropdown-item" href="${jsClients}">Clientes</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="${jsReservations}">Reservaciones</a></li>
-                                <li><a class="dropdown-item" href="${jsMessages}">Mensajes</a></li>
                             </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="${jsReservations}">Reservaciones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="${jsMessages}">Mensajes</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

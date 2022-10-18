@@ -13,8 +13,11 @@ function report(){
     let dateOne = new Date($("#dateIni").val());
     let dateTwo = new Date($("#dateEnd").val());
 
-    let dateOneStr = dateOne.toLocaleDateString('fr-CA');
-    let dateTwoStr = dateTwo.toLocaleDateString('fr-CA');
+    let dateOneStr = formatDate(dateOne);
+    let dateTwoStr = formatDate(dateTwo);
+
+    //let dateOneStr = dateOne.toLocaleDateString('fr-CA');
+    //let dateTwoStr = dateTwo.toLocaleDateString('fr-CA');
 
     if(Date.parse(dateOneStr) < Date.parse(dateTwoStr)){
         $.ajax({
@@ -47,7 +50,7 @@ function report(){
 }
 
 
-function format(inputDate) {
+function formatDate(inputDate) {
     let day, month, year;
   
     day = inputDate.getDate();
@@ -62,5 +65,5 @@ function format(inputDate) {
           .toString()
           .padStart(2, '0');
   
-    return `${year}/${month}/${day}`;
+    return `${year}-${month}-${day}`;
 }

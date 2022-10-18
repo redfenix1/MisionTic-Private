@@ -18,22 +18,40 @@
     <main class="container">
         <div class="d-flex justify-content-between align-items-center">
             <h1>Mensajes</h1>
-            <a class="btn btn-secondary" href="index.html" role="button">Regresar</a>
+            <!-- <a class="btn btn-secondary" href="index.html" role="button">Regresar</a> -->
         </div>
         <div class="row row-cols-1 row-cols-md-2 g-2 p-4 bg-light rounded-3">
             <div class="col-md-2 form-floating mb-3">
                 <input type="number" class="form-control" id="idMessage" placeholder="ID del mensaje" disabled>
                 <label for="idMessage">ID</label>
             </div>
-            <div class="col-md form-floating mb-3">
-                <textarea class="form-control" placeholder="Descripción del palco" id="textMessage"></textarea>
-                <label for="textMessage">Texto del Mensaje</label>
+            <div class="col-md-5 form-floating mb-3">
+                <select class="form-select" id="nameBox" aria-label="Nombre del palco" required>
+                  <option selected>Seleccione un palco</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+                <label for="nameBox">Palcos</label>
+            </div>
+            <div class="col-md-5 form-floating mb-3">
+                <select class="form-select" id="nameClient" aria-label="Nombre del cliente" required>
+                  <option selected>Seleccione un cliente</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+                <label for="nameClient">Cliente</label>
+            </div>
+            <div class="col-md-12 form-floating mb-3">
+                <textarea class="form-control" placeholder="Mensaje" id="textMessage"></textarea>
+                <label for="textMessage">Mensaje</label>
             </div>
             <div class="col-12 col-md-12">
                 <div class="row gap-3">
-                <button class="col-md btn btn-success" onclick="saveMessage()">Guardar</button>
-                <button class="col-md btn btn-warning" onclick="updateMessage()">Actualizar</button>
-                <button class="col-md btn btn-primary float-end" onclick="readMessages()">Listar</button>
+                    <button class="col-md btn btn-success" id="saveMessage" onclick="saveMessage()">Guardar</button>
+                    <button class="col-md btn btn-warning" id="updateMessage" onclick="updateMessage()">Actualizar</button>
+                    <button class="col-md btn btn-primary float-end" id="readMessages" onclick="readMessages(); buttonsDisplay(true,false,true);">Listar</button>
                 </div>
             </div>
         </div>

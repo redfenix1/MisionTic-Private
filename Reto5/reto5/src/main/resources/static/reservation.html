@@ -17,7 +17,7 @@
     <header id="mainMenu"></header>
     <main class="container">
         <div class="d-flex justify-content-between align-items-center">
-            <h1>Palcos</h1>
+            <h1>Reservaciones</h1>
             <!-- <a class="btn btn-secondary" href="index.html" role="button">Regresar</a> -->
         </div>
         <div class="row row-cols-1 row-cols-md-2 g-2 p-4 bg-light rounded-3">
@@ -25,40 +25,50 @@
                 <input type="number" class="form-control" id="idReservation" placeholder="ID de la reservación" disabled>
                 <label for="idReservation">ID</label>
             </div>
-            <div class="col-md-10 form-floating mb-3">
-                <input type="text" class="form-control" id="boxReservation" placeholder="Palco de la reservación">
-                <label for="boxReservation">Palco</label>
-            </div>
-            <div class="col-md form-floating mb-3">
-                <input type="text" class="form-control" id="clientReservation" placeholder="Cliente de la reservación">
-                <label for="clientReservation">Cliente</label>
-            </div>
-            <div class="col-md form-floating mb-3">
-                <input type="date" class="form-control" id="startDateReservation" placeholder="Fecha de inicio de la reservación" disabled>
-                <label for="startDateReservation">Fecha de inicio</label>
-            </div>
-            <div class="col-md form-floating mb-3">
-                <input type="date" class="form-control" id="devolutionDateReservation" placeholder="Fecha de devolución de la reservación" disabled>
-                <label for="devolutionDateReservation">Fecha de devolución</label>
-            </div>
-            <div class="col-md form-floating mb-3">
-                <select class="form-select" id="categoryReservation" aria-label="Categoría de la reservación">
-                  <option selected>Seleccione una categoría</option>
+            <div class="col-md-5 form-floating mb-3">
+                <select class="form-select" id="nameBox" aria-label="Nombre del palco" required>
+                  <option selected>Seleccione un palco</option>
                   <option value="1">One</option>
                   <option value="2">Two</option>
                   <option value="3">Three</option>
                 </select>
-                <label for="categoryReservation">Categoría</label>
+                <label for="nameBox">Palcos</label>
             </div>
-            <div class="col-md form-floating mb-3">
-                <textarea class="form-control" placeholder="Descripción de la reservación" id="descriptionReservation"></textarea>
+            <div class="col-md-5 form-floating mb-3">
+                <select class="form-select" id="nameClient" aria-label="Nombre del cliente" required>
+                  <option selected>Seleccione un cliente</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+                <label for="nameClient">Cliente</label>
+            </div>
+            <div class="col-md-2 form-floating mb-3">
+                <input type="date" class="form-control disabled" id="startDateReservation" placeholder="Fecha de inicio de la reservación">
+                <label for="startDateReservation">Fecha de inicio</label>
+            </div>
+            <div class="col-md-2 form-floating mb-3">
+                <input type="date" class="form-control disabled" id="devolutionDateReservation" placeholder="Fecha de devolución de la reservación">
+                <label for="devolutionDateReservation">Fecha de devolución</label>
+            </div>
+            <div class="col-md-2 form-floating mb-3">
+                <select class="form-select" id="statusReservation" aria-label="Estado de la reservación">
+                  <option selected>Seleccione una estado</option>
+                  <option value="Programed">Programado</option>
+                  <option value="Cancelled">Cancelado</option>
+                  <option value="Completed">Realizado</option>
+                </select>
+                <label for="statusReservation">Categoría</label>
+            </div>
+            <div class="col-md-6 form-floating mb-3">
+                <textarea class="form-control disabled" placeholder="Descripción de la reservación" id="descriptionReservation"></textarea>
                 <label for="descriptionReservation">Descripción</label>
             </div>
             <div class="col-12 col-md-12">
                 <div class="row gap-3">
-                <button class="col-md btn btn-success" onclick="saveReservation()">Guardar</button>
-                <button class="col-md btn btn-warning" onclick="updateReservation()">Actualizar</button>
-                <button class="col-md btn btn-primary float-end" onclick="readReservations()">Listar</button>
+                    <button class="col-md btn btn-success" id="saveReservation" onclick="saveReservation()">Guardar</button>
+                    <button class="col-md btn btn-warning" id="updateReservation" onclick="updateReservation()">Actualizar</button>
+                    <button class="col-md btn btn-primary float-end" id="readReservations" onclick="readReservations(); buttonsDisplay(true,false,true);">Listar</button>
                 </div>
             </div>
         </div>

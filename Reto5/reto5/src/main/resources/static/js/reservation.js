@@ -1,5 +1,5 @@
 // ***************************
-// MESSAGE (MENSAJE)
+// RESERVATION (RESERVACIÓN)
 // ***************************
 
 $(document).ready(function () {
@@ -18,7 +18,7 @@ function getBoxList() {
             // alert('Success');
             $("#nameBox").empty();
             $("#nameBox").append("<option value=''>Seleccione un palco</option>");
-            for (let i = 0; i < boxes.length; i++) {
+            for (i = 0; i < boxes.length; i++) {
                 let s = `
                       <option value="${boxes[i].id}">${boxes[i].name}</option>
                   `;
@@ -45,7 +45,7 @@ function getClientList() {
             // alert('Success');
             $("#nameClient").empty();
             $("#nameClient").append("<option value=''>Seleccione un cliente</option>");
-            for (let i = 0; i < clients.length; i++) {
+            for (i = 0; i < clients.length; i++) {
                 let s = `
                       <option value="${clients[i].idClient}">${clients[i].name}</option>
                   `;
@@ -61,51 +61,51 @@ function getClientList() {
     });
 }
 
-
-
-function getFrontMessageData() {
+function getFrontReservationData() {
     let k = {
-        id: $("#idMessage").val(),
+        id: $("#idReservation").val(),
         box: {
             id: $("#nameBox").val()
         },
         client: {
             idClient: $("#nameClient").val()
         },
-        textMessage: $("#textMessage").val()
-
+        // startDate: $("#startDateReservation").val(),
+        // devolutionDate: $("#devolutionDateReservation").val(),
+        // status: "created",
+        // score: null
     }
     return k;
 }
 
 function buttonsDisplay(save,update,lists){
     if(save==true){
-        $("#saveMessage").removeClass("disabled");
+        $("#saveReservation").removeClass("disabled");
     }else{
-        $("#saveMessage").addClass("disabled");
+        $("#saveReservation").addClass("disabled");
     }
     if(update==true){
-        $("#updateMessage").removeClass("disabled");
+        $("#updateReservation").removeClass("disabled");
     }else{
-        $("#updateMessage").addClass("disabled");
+        $("#updateReservation").addClass("disabled");
     }
     if(lists==true){
-        $("#readMessages").removeClass("disabled");
+        $("#readReservations").removeClass("disabled");
     }else{
-        $("#readMessages").addClass("disabled");
+        $("#readReservations").addClass("disabled");
     }
 }
 
 
-function readMessages() {
+function readReservations() {
     $.ajax({
-        url: 'api/Message/all',
+        url: 'api/Reservation/all',
         type: 'GET',
         dataType: 'json',
 
-        success: function (messages) {
-            clearInfoMessages();
-            drawMessages(messages.items);
+        success: function (reservation) {
+            clearInfoReservations();
+            drawReservations(reservation.items);
         },
         error: function (xhr, status) {
             alert('ha sucedido un problema');
@@ -116,7 +116,7 @@ function readMessages() {
     });
 }
 
-function drawMessages(items) {
+function drawReservations(items) {
     let myTable = "";
     myTable += "<table class='table table-light table-striped'>";
     myTable += "<thead>";
@@ -124,38 +124,48 @@ function drawMessages(items) {
     myTable += "<th>ID</th>";
     myTable += "<th>Palco</th>";
     myTable += "<th>Cliente</th>";
-    myTable += "<th>Mensaje</th>";
+    myTable += "<th>Fecha de inicio</th>";
+    myTable += "<th>Fecha de entrega</th>";
+    myTable += "<th>Estado</th>";
     myTable += "<th>Actualizar</th>";
     myTable += "<th>Borrar</th>";
     myTable += "</tr>";
     myTable += "</thead>";
     myTable += "<tbody>";
-    for (let i = 0; i < items.length; i++) {
+    for (i = 0; i < items.length; i++) {
         myTable + "<tr>";
         myTable += "<td>" + items[i].id + "</td>";
         myTable += "<td>" + items[i].box.name + "</td>";
         myTable += "<td>" + items[i].client.name + "</td>";
-        myTable += "<td>" + items[i].messageText + "</td>";
-        myTable+="<td class='align-middle'><button onclick='showMessage("+items[i].id+"); buttonsDisplay(false,true,true);' type='button' class='d-block mx-auto btn btn-warning'><i class='bi bi-pencil '></i></button></td>";
-        myTable+="<td class='align-middle'><button onclick='deleteMessage("+items[i].id+"); buttonsDisplay(true,false,true);' type='button' class='d-block mx-auto btn btn-danger'><i class='bi bi-trash'></i></button></td>";
+        myTable += "<td>" + items[i].startDate + "</td>";
+        myTable += "<td>" + items[i].devolutionDate + "</td>";
+        myTable += "<td>" + items[i].status + "</td>";
+        myTable+="<td class='align-middle'><button onclick='showReservation("+items[i].id+"); buttonsDisplay(false,true,true);' type='button' class='d-block mx-auto btn btn-warning'><i class='bi bi-pencil '></i></button></td>";
+        myTable+="<td class='align-middle'><button onclick='deleteReservation("+items[i].id+"); buttonsDisplay(true,false,true);' type='button' class='d-block mx-auto btn btn-danger'><i class='bi bi-trash'></i></button></td>";
         myTable += "</tr>"
     }
     myTable += "</tbody>";
     myTable += "</table>";
 
-    $("#listMessages").append(myTable);
+    $("#listReservations").append(myTable);
 
 }
 
-function saveMessage() {
-    if($("#nameBox").val()!="" && $("#nameClient").val()!="" && $("#messageText").val()!="") {
-        let data=getFrontMessageData();
+function saveReservation() {
+    if($("#nameBox").val()!="" && $("#nameClient").val()!="") {
+        
+        //let startDate = format(new Date($("#startDateReservation").val()));
+        //console.log(startDate);
+
+        let data=getFrontReservationData();
         data.id=null;
+        data.startDate=Date();
+        data.status="created";
         let dataToSend = JSON.stringify(data);
         console.log(dataToSend);
 
         $.ajax({
-            url: 'api/Message/save',
+            url: 'api/Reservation/save',
             type: 'POST',
             data: dataToSend,
             dataType: 'json',
@@ -169,31 +179,40 @@ function saveMessage() {
             },
             complete: function (xhr, status) {
                 // alert('Petición realizada');
-                clearInfoMessages();
-                readMessages();
+                clearInfoReservations();
+                readReservations();
                 buttonsDisplay(true,false,true);
             }
         });
     }
-
 }
 
-function clearInfoMessages() {
-    $("#listMessages").empty();
-    $("#idMessage").val("");
+function clearInfoReservations() {
+    $("#listReservations").empty();
+    $("#idReservation").val("");
     $("#nameBox").val("").change();
     $("#nameClient").val("").change();
-    $("#textMessage").val("");
+    $("#startDateReservation").val("");
+    $("#devolutionDateReservation").val("");
+    $("#statusReservation").val("").change();
+    $("#textReservation").val("");
 }
 
-function updateMessage() {
-    if($("#nameBox").val()!="" && $("#nameClient").val()!="" && $("#messageText").val()!="") {
-        let data = getFrontMessageData();
+function updateReservation() {
+    if($("#nameBox").val()!="" && $("#nameClient").val()!="" && $("#startDateReservation").val()!="" && $("#statusReservation").val()!="") {
+
+        let startDate = new Date($("#startDateReservation").val());
+        let devolDate = new Date($("#devolutionDateReservation").val());
+
+        let data = getFrontReservationData();
+        data.startDate=startDate;
+        data.devolutionDate=devolDate;
+        data.status=$("#statusReservation").val();
         let dataToSend = JSON.stringify(data);
         console.log(dataToSend);
 
         $.ajax({
-            url: 'api/Message/update',
+            url: 'api/Reservation/update',
             type: 'PUT',
             data: dataToSend,
             dataType: 'json',
@@ -207,23 +226,23 @@ function updateMessage() {
             },
             complete: function (xhr, status) {
                 // alert('Petición realizada');
-                clearInfoMessages();
-                readMessages();
+                clearInfoReservations();
+                readReservations();
                 buttonsDisplay(true, false, true);
             }
         });
     }
 }
 
-function deleteMessage(idMessage) {
+function deleteReservation(idReservation) {
     let data = {
-        id: idMessage
+        id: idReservation
     };
 
     let dataToSend = JSON.stringify(data);
 
     $.ajax({
-        url: 'api/Message/'+idMessage,
+        url: 'api/Reservation/'+idReservation,
         type: 'DELETE',
         data: dataToSend,
         dataType: 'json',
@@ -237,22 +256,22 @@ function deleteMessage(idMessage) {
         },
         complete: function (xhr, status) {
             // alert('Petición realizada');
-            clearInfoMessages();
-            readMessages();
+            clearInfoReservations();
+            readReservations();
             buttonsDisplay(true,false,true);
         }
     });
 }
 
-function showMessage(idMessage) {
+function showReservation(idReservation) {
     $.ajax({
-        url: 'api/Message/' + idMessage,
+        url: 'api/Reservation/' + idReservation,
         type: 'GET',
         dataType: 'json',
 
-        success: function (message) {
+        success: function (reservation) {
             // alert('Se ha guardado');
-            drawMessage(message.items);
+            drawReservation(reservation.items);
         },
         error: function (xhr, status) {
             // alert('ha sucedido un problema');
@@ -264,9 +283,31 @@ function showMessage(idMessage) {
 }
 
 
-function drawMessage(item) {
-    $("#idMessage").val(item.id);
+function drawReservation(item) {
+    $("#idReservation").val(item.id);
     $("#nameBox").val(item.box.id).change();
     $("#nameClient").val(item.client.idClient).change();
-    $("#textMessage").val(item.messageText);
+    $("#startDateReservation").val(item.startDate);
+    $("#devolutionDateReservation").val(item.devolutionDate);
+    $("#textReservation").val(item.reservationText);
+    $("#statusReservation").val(item.status).change();
+}
+
+
+function formatDate(inputDate) {
+    let day, month, year;
+  
+    day = inputDate.getDate();
+    month = inputDate.getMonth() + 1;
+    year = inputDate.getFullYear();
+  
+      day = day
+          .toString()
+          .padStart(2, '0');
+  
+      month = month
+          .toString()
+          .padStart(2, '0');
+  
+    return `${year}-${month}-${day}`;
 }
