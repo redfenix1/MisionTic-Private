@@ -13,16 +13,17 @@ function report(){
     // $("#dateIni").val()  Retorna un string "yyyy-mm-dd" Ejemplo 2020-12-31
     // toca añadirle la zona horaria de Colombia para este caso
     // new Date() siempre crea en zona horaria UTC
-    let dateOne = Date($("#dateIni").val()+' GMT-0500');
-    let dateTwo = Date($("#dateEnd").val()+' GMT-0500');
+    let dateOne = new Date($("#dateIni").val()+' GMT-0500');
+    let dateTwo = new Date($("#dateEnd").val()+' GMT-0500');
 
-    // let dateOneStr = formatDate(dateOne);
-    // let dateTwoStr = formatDate(dateTwo);
+    //let dateOneStr = formatDate(dateOne);
+    //let dateTwoStr = formatDate(dateTwo);
 
     //let dateOneStr = new Intl.DateTimeFormat('fr-CA').format(dateOne);
     //let dateTwoStr = new Intl.DateTimeFormat('fr-CA').format(dateTwo);
     //let dateTwoStr = dateTwo.toLocaleDateString('fr-CA');
 
+    console.log(dateOne < dateTwo);
     if(dateOne < dateTwo){
         $.ajax({
             url : 'api/Reservation/report-dates/'+formatDate(dateOne)+'/'+formatDate(dateTwo),
