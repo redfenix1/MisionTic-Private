@@ -10,18 +10,22 @@ $(document).ready(function() {
 
 
 function report(){
-    let dateOne = new Date($("#dateIni").val());
-    let dateTwo = new Date($("#dateEnd").val());
+    // $("#dateIni").val()  Retorna un string "yyyy-mm-dd" Ejemplo 2020-12-31
+    // toca añadirle la zona horaria de Colombia para este caso
+    // new Date() siempre crea en zona horaria UTC
+    let dateOne = Date($("#dateIni").val()+' GMT-0500');
+    let dateTwo = Date($("#dateEnd").val()+' GMT-0500');
 
-    let dateOneStr = formatDate(dateOne);
-    let dateTwoStr = formatDate(dateTwo);
+    // let dateOneStr = formatDate(dateOne);
+    // let dateTwoStr = formatDate(dateTwo);
 
-    //let dateOneStr = dateOne.toLocaleDateString('fr-CA');
+    //let dateOneStr = new Intl.DateTimeFormat('fr-CA').format(dateOne);
+    //let dateTwoStr = new Intl.DateTimeFormat('fr-CA').format(dateTwo);
     //let dateTwoStr = dateTwo.toLocaleDateString('fr-CA');
 
-    if(Date.parse(dateOneStr) < Date.parse(dateTwoStr)){
+    if(dateOne < dateTwo){
         $.ajax({
-            url : 'api/Reservation/report-dates/'+dateOneStr+'/'+dateTwoStr,
+            url : 'api/Reservation/report-dates/'+formatDate(dateOne)+'/'+formatDate(dateTwo),
             type : 'GET',
             dataType : 'json',
     
@@ -33,7 +37,7 @@ function report(){
                         <div class="card-header display-4 text-center">${r.length}</div>
                         <div class="card-body">
                             <h5 class="card-title text-center">Conteo de reservas</h5>
-                            <p class="card-text">Conteo de reservas de ${dateOne.toLocaleDateString('es-CO')} hasta ${dateTwo.toLocaleDateString('es-CO')}</p>
+                            <p class="card-text">Conteo de reservas desde el ${new Intl.DateTimeFormat('es-CO',{dateStyle:'full'}).format(dateOne)} hasta ${new Intl.DateTimeFormat('es-CO',{dateStyle:'full'}).format(dateTwo)}</p>
                         </div>
                     </div>
                 `;

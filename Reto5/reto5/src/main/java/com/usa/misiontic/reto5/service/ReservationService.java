@@ -88,7 +88,6 @@ public class ReservationService {
 
     public List<Reservation> ReservationTime(String fechaInicial,String fechaFinal){
         SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
-        //SimpleDateFormat parser = new SimpleDateFormat("YYYY-mm-dd");
 
         Date fechaUno = new Date();
         Date fechaDos = new Date();

@@ -44,24 +44,24 @@
                 <label for="nameClient">Cliente</label>
             </div>
             <div class="col-md-2 form-floating mb-3">
-                <input type="date" class="form-control disabled" id="startDateReservation" placeholder="Fecha de inicio de la reservación">
+                <input type="date" class="form-control" id="startDateReservation" placeholder="Fecha de inicio de la reservación" disabled>
                 <label for="startDateReservation">Fecha de inicio</label>
             </div>
             <div class="col-md-2 form-floating mb-3">
-                <input type="date" class="form-control disabled" id="devolutionDateReservation" placeholder="Fecha de devolución de la reservación">
+                <input type="date" class="form-control" id="devolutionDateReservation" placeholder="Fecha de devolución de la reservación" disabled>
                 <label for="devolutionDateReservation">Fecha de devolución</label>
             </div>
             <div class="col-md-2 form-floating mb-3">
-                <select class="form-select" id="statusReservation" aria-label="Estado de la reservación">
+                <select class="form-select" id="statusReservation" aria-label="Estado de la reservación" disabled>
                   <option selected>Seleccione una estado</option>
-                  <option value="Programed">Programado</option>
-                  <option value="Cancelled">Cancelado</option>
-                  <option value="Completed">Realizado</option>
+                  <option value="programed">Programado</option>
+                  <option value="cancelled">Cancelado</option>
+                  <option value="completed">Realizado</option>
                 </select>
                 <label for="statusReservation">Categoría</label>
             </div>
             <div class="col-md-6 form-floating mb-3">
-                <textarea class="form-control disabled" placeholder="Descripción de la reservación" id="descriptionReservation"></textarea>
+                <textarea class="form-control" placeholder="Descripción de la reservación" id="descriptionReservation" disabled></textarea>
                 <label for="descriptionReservation">Descripción</label>
             </div>
             <div class="col-12 col-md-12">
@@ -75,7 +75,7 @@
 
         <hr class="border border-primary border-1 opacity-75">
 
-        <div id="listReservationes">
+        <div id="listReservations">
 
         </div>
     </main>

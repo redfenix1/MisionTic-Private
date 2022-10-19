@@ -63,7 +63,7 @@ function getClientList() {
 
 function getFrontReservationData() {
     let k = {
-        id: $("#idReservation").val(),
+        idReservation: $("#idReservation").val(),
         box: {
             id: $("#nameBox").val()
         },
@@ -81,11 +81,16 @@ function getFrontReservationData() {
 function buttonsDisplay(save,update,lists){
     if(save==true){
         $("#saveReservation").removeClass("disabled");
+        //$("#startDateReservation").attr('disabled', true);
+        //$("#textReservation").removeAttr("disabled");
     }else{
         $("#saveReservation").addClass("disabled");
     }
     if(update==true){
         $("#updateReservation").removeClass("disabled");
+        $("#startDateReservation").removeAttr("disabled");
+        $("#devolutionDateReservation").removeAttr("disabled");
+        $("#statusReservation").removeAttr("disabled");
     }else{
         $("#updateReservation").addClass("disabled");
     }
@@ -104,8 +109,11 @@ function readReservations() {
         dataType: 'json',
 
         success: function (reservation) {
+            console.log(reservation);
+
+            console.log($("#startDateReservation").val());
             clearInfoReservations();
-            drawReservations(reservation.items);
+            drawReservations(reservation);
         },
         error: function (xhr, status) {
             alert('ha sucedido un problema');
@@ -133,16 +141,19 @@ function drawReservations(items) {
     myTable += "</thead>";
     myTable += "<tbody>";
     for (i = 0; i < items.length; i++) {
-        myTable + "<tr>";
-        myTable += "<td>" + items[i].id + "</td>";
+        console.log(typeof new Date((items[i].startDate).substring(0,10)+' GMT-0500') + "" + new Date((items[i].startDate).substring(0,10)+' GMT-0500'));
+        const diaUno = items[i].startDate===null ? "" : formatDate(new Date((items[i].startDate).substring(0,10)+' GMT-0500'));
+        const diaDos = items[i].devolutionDate===null ? "" : formatDate(new Date((items[i].devolutionDate).substring(0,10)+' GMT-0500'));
+        myTable += "<tr>";
+        myTable += "<td>" + items[i].idReservation + "</td>";
         myTable += "<td>" + items[i].box.name + "</td>";
         myTable += "<td>" + items[i].client.name + "</td>";
-        myTable += "<td>" + items[i].startDate + "</td>";
-        myTable += "<td>" + items[i].devolutionDate + "</td>";
+        myTable += "<td>" + diaUno + "</td>";
+        myTable += "<td>" + diaDos + "</td>";
         myTable += "<td>" + items[i].status + "</td>";
-        myTable+="<td class='align-middle'><button onclick='showReservation("+items[i].id+"); buttonsDisplay(false,true,true);' type='button' class='d-block mx-auto btn btn-warning'><i class='bi bi-pencil '></i></button></td>";
-        myTable+="<td class='align-middle'><button onclick='deleteReservation("+items[i].id+"); buttonsDisplay(true,false,true);' type='button' class='d-block mx-auto btn btn-danger'><i class='bi bi-trash'></i></button></td>";
-        myTable += "</tr>"
+        myTable+="<td class='align-middle'><button onclick='showReservation("+items[i].idReservation+"); buttonsDisplay(false,true,true);' type='button' class='d-block mx-auto btn btn-warning'><i class='bi bi-pencil '></i></button></td>";
+        myTable+="<td class='align-middle'><button onclick='deleteReservation("+items[i].idReservation+"); buttonsDisplay(true,false,true);' type='button' class='d-block mx-auto btn btn-danger'><i class='bi bi-trash'></i></button></td>";
+        myTable += "</tr>";
     }
     myTable += "</tbody>";
     myTable += "</table>";
@@ -158,8 +169,8 @@ function saveReservation() {
         //console.log(startDate);
 
         let data=getFrontReservationData();
-        data.id=null;
-        data.startDate=Date();
+        data.idReservation=null;
+        data.startDate=formatDate(new Date());
         data.status="created";
         let dataToSend = JSON.stringify(data);
         console.log(dataToSend);
@@ -201,12 +212,12 @@ function clearInfoReservations() {
 function updateReservation() {
     if($("#nameBox").val()!="" && $("#nameClient").val()!="" && $("#startDateReservation").val()!="" && $("#statusReservation").val()!="") {
 
-        let startDate = new Date($("#startDateReservation").val());
-        let devolDate = new Date($("#devolutionDateReservation").val());
+        let startDate = new Date($("#startDateReservation").val()+' GMT-0500');
+        let devolDate = new Date($("#devolutionDateReservation").val()+' GMT-0500');
 
         let data = getFrontReservationData();
-        data.startDate=startDate;
-        data.devolutionDate=devolDate;
+        data.startDate=formatDate(startDate);
+        data.devolutionDate= formatDate(devolDate);
         data.status=$("#statusReservation").val();
         let dataToSend = JSON.stringify(data);
         console.log(dataToSend);
@@ -236,7 +247,7 @@ function updateReservation() {
 
 function deleteReservation(idReservation) {
     let data = {
-        id: idReservation
+        idReservation: idReservation
     };
 
     let dataToSend = JSON.stringify(data);
@@ -271,7 +282,7 @@ function showReservation(idReservation) {
 
         success: function (reservation) {
             // alert('Se ha guardado');
-            drawReservation(reservation.items);
+            drawReservation(reservation);
         },
         error: function (xhr, status) {
             // alert('ha sucedido un problema');
@@ -284,11 +295,14 @@ function showReservation(idReservation) {
 
 
 function drawReservation(item) {
-    $("#idReservation").val(item.id);
+    const diaUno = item.startDate===null ? "" : formatDate(new Date((item.startDate).substring(0,10)+' GMT-0500'));
+    const diaDos = item.devolutionDate===null ? "" : formatDate(new Date((item.devolutionDate).substring(0,10)+' GMT-0500'));
+
+    $("#idReservation").val(item.idReservation);
     $("#nameBox").val(item.box.id).change();
     $("#nameClient").val(item.client.idClient).change();
-    $("#startDateReservation").val(item.startDate);
-    $("#devolutionDateReservation").val(item.devolutionDate);
+    $("#startDateReservation").val(diaUno);
+    $("#devolutionDateReservation").val(diaDos);
     $("#textReservation").val(item.reservationText);
     $("#statusReservation").val(item.status).change();
 }

@@ -65,15 +65,14 @@ function getClientList() {
 
 function getFrontMessageData() {
     let k = {
-        id: $("#idMessage").val(),
+        idMessage: $("#idMessage").val(),
         box: {
             id: $("#nameBox").val()
         },
         client: {
             idClient: $("#nameClient").val()
         },
-        textMessage: $("#textMessage").val()
-
+        messageText: $("#textMessage").val()
     }
     return k;
 }
@@ -105,7 +104,7 @@ function readMessages() {
 
         success: function (messages) {
             clearInfoMessages();
-            drawMessages(messages.items);
+            drawMessages(messages);
         },
         error: function (xhr, status) {
             alert('ha sucedido un problema');
@@ -132,13 +131,13 @@ function drawMessages(items) {
     myTable += "<tbody>";
     for (let i = 0; i < items.length; i++) {
         myTable + "<tr>";
-        myTable += "<td>" + items[i].id + "</td>";
+        myTable += "<td>" + items[i].idMessage + "</td>";
         myTable += "<td>" + items[i].box.name + "</td>";
         myTable += "<td>" + items[i].client.name + "</td>";
         myTable += "<td>" + items[i].messageText + "</td>";
-        myTable+="<td class='align-middle'><button onclick='showMessage("+items[i].id+"); buttonsDisplay(false,true,true);' type='button' class='d-block mx-auto btn btn-warning'><i class='bi bi-pencil '></i></button></td>";
-        myTable+="<td class='align-middle'><button onclick='deleteMessage("+items[i].id+"); buttonsDisplay(true,false,true);' type='button' class='d-block mx-auto btn btn-danger'><i class='bi bi-trash'></i></button></td>";
-        myTable += "</tr>"
+        myTable+="<td class='align-middle'><button onclick='showMessage("+items[i].idMessage+"); buttonsDisplay(false,true,true);' type='button' class='d-block mx-auto btn btn-warning'><i class='bi bi-pencil '></i></button></td>";
+        myTable+="<td class='align-middle'><button onclick='deleteMessage("+items[i].idMessage+"); buttonsDisplay(true,false,true);' type='button' class='d-block mx-auto btn btn-danger'><i class='bi bi-trash'></i></button></td>";
+        myTable += "</tr>";
     }
     myTable += "</tbody>";
     myTable += "</table>";
@@ -148,9 +147,9 @@ function drawMessages(items) {
 }
 
 function saveMessage() {
-    if($("#nameBox").val()!="" && $("#nameClient").val()!="" && $("#messageText").val()!="") {
+    if($("#nameBox").val()!="" && $("#nameClient").val()!="" && $("#textMessage").val()!="") {
         let data=getFrontMessageData();
-        data.id=null;
+        data.idMessage=null;
         let dataToSend = JSON.stringify(data);
         console.log(dataToSend);
 
@@ -187,7 +186,7 @@ function clearInfoMessages() {
 }
 
 function updateMessage() {
-    if($("#nameBox").val()!="" && $("#nameClient").val()!="" && $("#messageText").val()!="") {
+    if($("#nameBox").val()!="" && $("#nameClient").val()!="" && $("#textMessage").val()!="") {
         let data = getFrontMessageData();
         let dataToSend = JSON.stringify(data);
         console.log(dataToSend);
@@ -217,7 +216,7 @@ function updateMessage() {
 
 function deleteMessage(idMessage) {
     let data = {
-        id: idMessage
+        idMessage: idMessage
     };
 
     let dataToSend = JSON.stringify(data);
@@ -252,7 +251,7 @@ function showMessage(idMessage) {
 
         success: function (message) {
             // alert('Se ha guardado');
-            drawMessage(message.items);
+            drawMessage(message);
         },
         error: function (xhr, status) {
             // alert('ha sucedido un problema');
@@ -265,7 +264,7 @@ function showMessage(idMessage) {
 
 
 function drawMessage(item) {
-    $("#idMessage").val(item.id);
+    $("#idMessage").val(item.idMessage);
     $("#nameBox").val(item.box.id).change();
     $("#nameClient").val(item.client.idClient).change();
     $("#textMessage").val(item.messageText);

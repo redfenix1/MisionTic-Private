@@ -109,7 +109,7 @@ function drawBoxes(items){
         myTable+="<td>" + items[i].name + "</td>";
         myTable+="<td class='align-middle'><button onclick='showBox("+items[i].id+"); buttonsDisplay(false,true,true);' type='button' class='d-block mx-auto btn btn-warning'><i class='bi bi-pencil '></i></button></td>";
         myTable+="<td class='align-middle'><button onclick='deleteBox("+items[i].id+"); buttonsDisplay(true,false,true);' type='button' class='d-block mx-auto btn btn-danger'><i class='bi bi-trash'></i></button></td>";
-        myTable+="</tr>"
+        myTable+="</tr>";
     }
     myTable+="</tbody>";
     myTable+="</table>";
